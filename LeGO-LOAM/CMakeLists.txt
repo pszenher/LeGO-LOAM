@@ -4,29 +4,29 @@ project(lego_loam)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
 
 find_package(catkin REQUIRED COMPONENTS
-  tf
-  roscpp
-  rospy
-  cv_bridge
-  image_transport
-
-  pcl_ros
+  message_generation
   pcl_conversions
-
-  std_msgs
+  roscpp
   sensor_msgs
-  geometry_msgs
-  nav_msgs
-  cloud_msgs
+  std_msgs
+  tf
 )
 
 find_package(GTSAM REQUIRED QUIET)
 find_package(PCL REQUIRED QUIET)
 find_package(OpenCV REQUIRED QUIET)
 
+add_message_files(
+  DIRECTORY msg
+  FILES cloud_info.msg
+)
+
+generate_messages(
+  DEPENDENCIES std_msgs
+)
+
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS cloud_msgs
   DEPENDS PCL
 )
 
@@ -46,15 +46,17 @@ link_directories(
 )
 
 add_executable(imageProjection src/imageProjection.cpp)
-add_dependencies(imageProjection ${catkin_EXPORTED_TARGETS} cloud_msgs_gencpp)
+add_dependencies(imageProjection ${catkin_EXPORTED_TARGETS} lego_loam_gencpp)
 target_link_libraries(imageProjection ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(featureAssociation src/featureAssociation.cpp)
-add_dependencies(featureAssociation ${catkin_EXPORTED_TARGETS} cloud_msgs_gencpp)
+add_dependencies(featureAssociation ${catkin_EXPORTED_TARGETS} lego_loam_gencpp)
 target_link_libraries(featureAssociation ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(mapOptmization src/mapOptmization.cpp)
+add_dependencies(mapOptmization lego_loam_gencpp)
 target_link_libraries(mapOptmization ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} gtsam)
 
 add_executable(transformFusion src/transformFusion.cpp)
+add_dependencies(transformFusion lego_loam_gencpp)
 target_link_libraries(transformFusion ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
