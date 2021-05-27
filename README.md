@@ -1,11 +1,8 @@
 # LeGO-LOAM
 
 This repository contains code for a lightweight and ground optimized lidar odometry and mapping (LeGO-LOAM) system for ROS compatible UGVs. The system takes in point cloud  from a Velodyne VLP-16 Lidar (palced horizontally) and optional IMU data as inputs. It outputs 6D pose estimation in real-time. A demonstration of the system can be found here -> https://www.youtube.com/watch?v=O3tz_ftHV48
-<!--
-[![Watch the video](/LeGO-LOAM/launch/demo.gif)](https://www.youtube.com/watch?v=O3tz_ftHV48)
--->
 <p align='center'>
-    <img src="/LeGO-LOAM/launch/demo.gif" alt="drawing" width="800"/>
+    <img src="../assets/demo.gif" alt="drawing" width="800"/>
 </p>
 
 ## Lidar-inertial Odometry
@@ -39,22 +36,22 @@ When you compile the code for the first time, you need to add "-j1" behind "catk
 
 ## The system
 
-LeGO-LOAM is speficifally optimized for a horizontally placed VLP-16 on a ground vehicle. It assumes there is always a ground plane in the scan. The UGV we are using is Clearpath Jackal. It has a built-in IMU. 
+LeGO-LOAM is speficifally optimized for a horizontally placed VLP-16 on a ground vehicle. It assumes there is always a ground plane in the scan. The UGV we are using is Clearpath Jackal. It has a built-in IMU.
 
 <p align='center'>
-    <img src="/LeGO-LOAM/launch/jackal-label.jpg" alt="drawing" width="400"/>
+    <img src="../assets/jackal-label.jpg" alt="drawing" width="400"/>
 </p>
 
 The package performs segmentation before feature extraction.
 
 <p align='center'>
-    <img src="/LeGO-LOAM/launch/seg-total.jpg" alt="drawing" width="400"/>
+    <img src="../assets/seg-total.jpg" alt="drawing" width="400"/>
 </p>
 
 Lidar odometry performs two-step Levenberg Marquardt optimization to get 6D transformation.
 
 <p align='center'>
-    <img src="/LeGO-LOAM/launch/odometry.jpg" alt="drawing" width="400"/>
+    <img src="../assets/odometry.jpg" alt="drawing" width="400"/>
 </p>
 
 ## New Lidar
@@ -99,22 +96,22 @@ Notes: The parameter "/use_sim_time" is set to "true" for simulation, "false" to
 ```
 rosbag play *.bag --clock --topic /velodyne_points /imu/data
 ```
-Notes: Though /imu/data is optinal, it can improve estimation accuracy greatly if provided. Some sample bags can be downloaded from [here](https://github.com/RobustFieldAutonomyLab/jackal_dataset_20170608). 
+Notes: Though /imu/data is optinal, it can improve estimation accuracy greatly if provided. Some sample bags can be downloaded from [here](https://github.com/RobustFieldAutonomyLab/jackal_dataset_20170608).
 
 ## New data-set
 
-This dataset, [Stevens data-set](https://github.com/TixiaoShan/Stevens-VLP16-Dataset), is captured using a Velodyne VLP-16, which is mounted on an UGV - Clearpath Jackal, on Stevens Institute of Technology campus. The VLP-16 rotation rate is set to 10Hz. This data-set features over 20K scans and many loop-closures. 
+This dataset, [Stevens data-set](https://github.com/TixiaoShan/Stevens-VLP16-Dataset), is captured using a Velodyne VLP-16, which is mounted on an UGV - Clearpath Jackal, on Stevens Institute of Technology campus. The VLP-16 rotation rate is set to 10Hz. This data-set features over 20K scans and many loop-closures.
 
 <p align='center'>
-    <img src="/LeGO-LOAM/launch/dataset-demo.gif" alt="drawing" width="600"/>
+    <img src="../assets/dataset-demo.gif" alt="drawing" width="600"/>
 </p>
 <p align='center'>
-    <img src="/LeGO-LOAM/launch/google-earth.png" alt="drawing" width="600"/>  
+    <img src="../assets/google-earth.png" alt="drawing" width="600"/>
 </p>
 
 ## Cite *LeGO-LOAM*
 
-Thank you for citing [our *LeGO-LOAM* paper](./Shan_Englot_IROS_2018_Preprint.pdf) if you use any of this code: 
+Thank you for citing [our *LeGO-LOAM* paper](../assets/Shan_Englot_IROS_2018_Preprint.pdf) if you use any of this code:
 ```
 @inproceedings{legoloam2018,
   title={LeGO-LOAM: Lightweight and Ground-Optimized Lidar Odometry and Mapping on Variable Terrain},
