@@ -23,7 +23,6 @@ RUN apt-get update && \
 
 COPY . /catkin_ws/src/lego-loam
 
-RUN /ros_entrypoint.sh catkin_make -j"$(nproc)" --directory /catkin_ws
-RUN sed -i "$(wc -l < /ros_entrypoint.sh)i\\source \"/catkin_ws/devel/setup.bash\"\\" /ros_entrypoint.sh
+RUN /ros_entrypoint.sh catkin_make -j"$(nproc)" --directory /catkin_ws -DCMAKE_INSTALL_PREFIX="/opt/ros/${ROS_DISTRO}" install
 
 ENTRYPOINT [ "/ros_entrypoint.sh" ]

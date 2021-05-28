@@ -5,7 +5,7 @@ RELEASES := 	kinetic \
 
 .PHONY: all
 
-%: lego-loam.Dockerfile
+lego-loam-%: lego-loam.Dockerfile
 	docker build -t "pszenher/lego-loam:$*" -f "lego-loam.Dockerfile" --build-arg="ROS_DISTRO=$*" ..
 
-all: $(RELEASES)
+all: $(addprefix lego-loam-,$(RELEASES))
